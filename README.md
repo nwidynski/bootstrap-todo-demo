@@ -14,11 +14,11 @@ A simple static todo webpage made with bootstrap 4.3
 
 * Clone this repo to your local hard drive
 ```
-git clone <link to repo>
+git clone https://github.com/nwidynski/bootstrap-todo-demo.git
 ```
-* Install dependencies
+* Change into project directory and install dependencies
 ```
-npm install
+cd bootstrap-todo-demo && npm install
 ```
 
 ### Executing program
