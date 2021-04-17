@@ -4,6 +4,8 @@
 
 A simple static todo webpage made with bootstrap 4.3
 
+[Live Demo](https://bootstrap-todo-demo.netlify.app/)
+
 ## Getting Started
 
 ### Dependencies
@@ -37,7 +39,7 @@ Nikolas Schröter (Twitter @nwidynski)
 
 ## Version History
 
-* 0.1
+* 1.0
     * Initial Release
 
 ## License
