@@ -33,9 +33,7 @@ npm run start
 
 ## Authors
 
-Contributors names and contact info
-
-Nikolas Schröter (Twitter @nwidynski)
+Nikolas Schröter
 
 ## Version History
 
