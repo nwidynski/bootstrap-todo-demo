@@ -10,11 +10,11 @@ A simple static todo webpage made with bootstrap 4.3
 
 ### Dependencies
 
-* node, npm, browser
+* node, npm, git, browser
 
 ### Installing
 
-* Clone this repo to your local hard drive
+* Clone this repository
 ```
 git clone https://github.com/nwidynski/bootstrap-todo-demo.git
 ```
@@ -33,9 +33,7 @@ npm run start
 
 ## Authors
 
-Contributors names and contact info
-
-Nikolas Schröter (Twitter @nwidynski)
+Nikolas Schröter
 
 ## Version History
 
