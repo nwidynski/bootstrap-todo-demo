@@ -15,6 +15,13 @@ router.post(
   TodoController.create
 );
 
+router.get(
+  "/:id",
+  TodoController.validateParams(),
+  TodoController.handleValidationResult,
+  TodoController.get
+);
+
 router.put(
   "/:id",
   TodoController.validateParams(),

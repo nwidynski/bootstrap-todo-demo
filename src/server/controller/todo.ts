@@ -33,32 +33,46 @@ const updateTodo = (
 };
 
 namespace TodoController {
+  enum ValidationMessages {
+    UNDEFINED = "undefined",
+    WRONG_TYPE = "wrong type",
+    WRONG_FORMAT = "wrong format",
+    WRONG_VALUE = "wrong value",
+  }
+
   export const validateParams = () => {
-    return [param("id", "id doesn't exist").exists().isInt()];
+    return [
+      param("id", "id doesn't exist")
+        .exists()
+        .isInt()
+        .withMessage(ValidationMessages.WRONG_TYPE),
+    ];
   };
 
   export const validateBody = () => {
     return [
-      body("name", "name doesn't exist")
+      body("name", ValidationMessages.UNDEFINED)
         .exists()
         .isString()
-        .withMessage("name is not string")
+        .withMessage(ValidationMessages.WRONG_TYPE)
         .trim()
         .escape(),
-      body("isDone", "isDone doesn't exist")
+      body("isDone", ValidationMessages.UNDEFINED)
         .exists()
         .isBoolean()
-        .withMessage("isDone is not boolean"),
-      body("dueDate", "dueDate doesn't exist")
+        .withMessage(ValidationMessages.WRONG_TYPE),
+      body("dueDate", ValidationMessages.UNDEFINED)
         .exists()
         .isString()
-        .withMessage("dueDate is not String")
+        .withMessage(ValidationMessages.WRONG_TYPE)
         .isISO8601()
-        .withMessage("dueDate is not in ISO8601 format"),
-      body("progress", "progress doesn't exist")
+        .withMessage(ValidationMessages.WRONG_FORMAT),
+      body("progress", ValidationMessages.UNDEFINED)
         .exists()
+        .isInt()
+        .withMessage(ValidationMessages.WRONG_TYPE)
         .isInt({ min: 0, max: 100 })
-        .withMessage("progress is not int"),
+        .withMessage(ValidationMessages.WRONG_VALUE),
     ];
   };
 
@@ -71,7 +85,9 @@ namespace TodoController {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
+      return res
+        .status(422)
+        .json({ errors: errors.array({ onlyFirstError: true }) });
     }
 
     next();
@@ -86,6 +102,26 @@ namespace TodoController {
       const todos = await prisma.todo.findMany();
 
       res.status(200).json(todos);
+    } catch (err) {
+      return next(err);
+    }
+  };
+
+  export const get = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    try {
+      const id = Number.parseInt(req.params.id);
+
+      const todo = await prisma.todo.findUnique({
+        where: {
+          id: id,
+        },
+      });
+
+      res.status(200).json(todo);
     } catch (err) {
       return next(err);
     }
