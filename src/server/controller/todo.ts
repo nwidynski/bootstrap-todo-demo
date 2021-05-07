@@ -42,7 +42,7 @@ namespace TodoController {
 
   export const validateParams = () => {
     return [
-      param("id", "id doesn't exist")
+      param("id", ValidationMessages.UNDEFINED)
         .exists()
         .isInt()
         .withMessage(ValidationMessages.WRONG_TYPE),
@@ -159,6 +159,26 @@ namespace TodoController {
 
       const todo = await prisma.todo.create({
         data: createTodo(name, isDone, dueDate, progress),
+      });
+
+      res.status(200).json(todo);
+    } catch (err) {
+      return next(err);
+    }
+  };
+
+  export const remove = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    try {
+      const id = Number.parseInt(req.params.id);
+
+      const todo = await prisma.todo.delete({
+        where: {
+          id: id,
+        },
       });
 
       res.status(200).json(todo);
