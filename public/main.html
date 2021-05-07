@@ -78,7 +78,7 @@
                       <div role="button" class="btn btn-primary mb-1" @click="{state = 'edit'; editTodo = todo}">
                         Edit
                       </div>
-                      <button type="button" class="btn btn-danger mb-1">
+                      <button type="button" class="btn btn-danger mb-1" @click="deleteData(todo.id)">
                         Delete
                       </button>
                     </td>
@@ -172,8 +172,9 @@
     el: '#app',
     data: {
       todos: [],
-      editTodo: {},
-      state: "default"
+      editTodo: -1,
+      state: "default",
+      
     },
     watch: {
       editTodo: function () {
@@ -222,7 +223,18 @@
           },
           body: JSON.stringify(putData),
         }).then(res => this.getData())
-      }
+      },
+      deleteData(idParam) {
+      
+        console.log("deleteData")
+
+        fetch('todos/' + idParam, {
+          method: 'DELETE',
+          headers: {
+            'Content-type': 'application/json'
+          },
+        }).then(res => this.getData())
+      },
     },
     created() {
       this.getData()
