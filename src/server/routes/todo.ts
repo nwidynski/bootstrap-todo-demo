@@ -1,5 +1,4 @@
 import express from "express";
-import { body, param, validationResult } from "express-validator/check";
 import TodoController from "../controller/todo";
 
 const router = express.Router();
@@ -28,6 +27,13 @@ router.put(
   TodoController.validateBody(),
   TodoController.handleValidationResult,
   TodoController.edit
+);
+
+router.delete(
+  "/:id",
+  TodoController.validateParams(),
+  TodoController.handleValidationResult,
+  TodoController.remove
 );
 
 export default router;
