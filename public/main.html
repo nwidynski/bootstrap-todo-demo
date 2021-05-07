@@ -61,8 +61,8 @@
                   <tr v-for="todo in todos">
                     <td>
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="todo1" checked />
-                        <label class="custom-control-label" for="todo1">{{todo.name}}</label>
+                        <input type="checkbox" class="custom-control-input" :id="'todo' + todo.id" checked />
+                        <label class="custom-control-label" :for="'todo' + todo.id">{{todo.name}}</label>
                       </div>
                     </td>
                     <td>{{todo.dueDate}}</td>
@@ -112,12 +112,12 @@
                   <!-- Edit part -->
                   <tr v-if="state == 'edit'">
                     <td>
-                      <input id="editName" type="text" class="form-control" value="Task 3" placeholder="Task name"
+                      <input id="editName" type="text" class="form-control" :value="editTodo.name||''" placeholder="Task name"
                         aria-label="task name" aria-describedby="task-add-btn" />
                     </td>
                     <td>
-                      <input id="editDate" type="date" class="form-control" value="2021-04-16" placeholder="Due date"
-                        aria-label="due date" aria-describedby="task-add-btn" />
+                      <input id="editDate" type="date" class="form-control" :value="editTodo.dueDate.split('T')[0]||''" placeholder="Due date"
+                        aria-label="due date" aria-describedby="task-add-btn"/>
                     </td>
                     <td>
                       <div class="form-group">
