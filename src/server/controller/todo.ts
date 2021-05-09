@@ -64,9 +64,9 @@ namespace TodoController {
       body("dueDate", ValidationMessages.UNDEFINED)
         .exists()
         .isString()
-        .withMessage(ValidationMessages.WRONG_TYPE),
-        //.isISO8601()
-        //.withMessage(ValidationMessages.WRONG_FORMAT),
+        .withMessage(ValidationMessages.WRONG_TYPE)
+        .isISO8601()
+        .withMessage(ValidationMessages.WRONG_FORMAT),
       body("progress", ValidationMessages.UNDEFINED)
         .exists()
         .isInt()
@@ -81,7 +81,6 @@ namespace TodoController {
     res: express.Response,
     next: express.NextFunction
   ) => {
-    console.log("here");
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {

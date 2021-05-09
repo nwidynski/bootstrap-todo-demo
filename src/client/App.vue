@@ -1,0 +1,63 @@
+<template>
+  <div id="app">
+    <header>
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">ToDo Demo</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          aria-controls="navigation-menu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navigation-menu">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/impressum.html">Impressum</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main class="mt-3" style="min-height: 100vh">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <TodoList></TodoList>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <button
+              type="button"
+              class="btn btn-outline-primary w-100"
+              style="border-style: dashed"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</template>
+
+<script>
+import { Vue, Component } from "vue-property-decorator";
+
+import TodoList from "./components/TodoList.vue";
+
+@Component({ components: { TodoList } })
+export default class App extends Vue {}
+</script>
+
+<style scoped></style>
