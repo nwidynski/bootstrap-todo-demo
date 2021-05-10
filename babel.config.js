@@ -5,7 +5,8 @@ module.exports = {
       presets: ["@vue/cli-plugin-babel/preset"],
     },
     {
-      test: "src/server",
+      test: ".",
+      exclude: ["node_modules", "dist", "public", "src/client"],
       presets: ["@babel/preset-typescript", "@babel/preset-env"],
       plugins: [
         [
@@ -13,8 +14,8 @@ module.exports = {
           {
             root: ["./src/server"],
             alias: {
-              "@controller": "./controller",
-              "@routes": "./routes",
+              "@controller": "./src/server/controller",
+              "@routes": "./src/server/routes",
             },
           },
         ],

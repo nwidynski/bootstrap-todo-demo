@@ -3,7 +3,7 @@ import express from "express";
 import TodoRouter from "@routes/todo";
 
 const app = express();
-const port = process.env.PORT || 8081;
+const port = process.env.PORT || 80;
 
 app.use("/todos", TodoRouter);
 
