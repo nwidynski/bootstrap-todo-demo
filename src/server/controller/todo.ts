@@ -4,6 +4,15 @@ import { Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+/**
+ * Adds type-safety for create todo input.
+ *
+ * @param name
+ * @param isDone
+ * @param dueDate
+ * @param progress
+ * @return {*}
+ */
 const createTodo = (
   name: string,
   isDone: boolean,
@@ -18,6 +27,15 @@ const createTodo = (
   });
 };
 
+/**
+ * Adds type-safety for update todo input
+ *
+ * @param name
+ * @param isDone
+ * @param dueDate
+ * @param progress
+ * @return {*}
+ */
 const updateTodo = (
   name: string,
   isDone: boolean,
@@ -33,6 +51,9 @@ const updateTodo = (
 };
 
 namespace TodoController {
+  /**
+   * Contains all common Validation error messages
+   */
   enum ValidationMessages {
     UNDEFINED = "undefined",
     WRONG_TYPE = "wrong type",
@@ -40,6 +61,9 @@ namespace TodoController {
     WRONG_VALUE = "wrong value",
   }
 
+  /**
+   * Validates path parameters for GET/PUT/DELETE - /todos/{:id}
+   */
   export const validateParams = () => {
     return [
       param("id", ValidationMessages.UNDEFINED)
@@ -49,6 +73,9 @@ namespace TodoController {
     ];
   };
 
+  /**
+   * Validates body payload for PUT/POST - /todos/{:id}
+   */
   export const validateBody = () => {
     return [
       body("name", ValidationMessages.UNDEFINED)
@@ -76,6 +103,9 @@ namespace TodoController {
     ];
   };
 
+  /**
+   * Handles result of validation chain
+   */
   export const handleValidationResult = (
     req: express.Request,
     res: express.Response,
@@ -92,6 +122,10 @@ namespace TodoController {
     next();
   };
 
+  /**
+   * List all todos
+   * @return JSON Array
+   */
   export const list = async (
     req: express.Request,
     res: express.Response,
@@ -106,6 +140,10 @@ namespace TodoController {
     }
   };
 
+  /**
+   * Get a specified todo
+   * @return  JSON Object
+   */
   export const get = async (
     req: express.Request,
     res: express.Response,
@@ -126,6 +164,10 @@ namespace TodoController {
     }
   };
 
+  /**
+   * Updates a specified todo
+   * @return JSON Object
+   */
   export const edit = async (
     req: express.Request,
     res: express.Response,
@@ -148,6 +190,10 @@ namespace TodoController {
     }
   };
 
+  /**
+   * Adds a new todo
+   * @return JSON Object
+   */
   export const create = async (
     req: express.Request,
     res: express.Response,
@@ -166,6 +212,10 @@ namespace TodoController {
     }
   };
 
+  /**
+   * Deletes a specified todo
+   * @return JSON Object
+   */
   export const remove = async (
     req: express.Request,
     res: express.Response,

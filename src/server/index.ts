@@ -1,8 +1,6 @@
 import express from "express";
-import path from "path";
-import { nextTick } from "vue/types/umd";
 
-import TodoRouter from "./routes/todo";
+import TodoRouter from "@routes/todo";
 
 const app = express();
 const port = process.env.PORT || 8081;

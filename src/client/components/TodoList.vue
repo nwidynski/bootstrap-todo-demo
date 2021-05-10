@@ -73,7 +73,7 @@
 import moment from "moment";
 import { Vue, Component, Prop } from "vue-property-decorator";
 
-import Todo from "./Todo.vue";
+import Todo from "@components/Todo.vue";
 
 @Component({ components: { Todo } })
 export default class TodoList extends Vue {

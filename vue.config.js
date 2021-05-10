@@ -1,10 +1,12 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const path = require("path");
 
 module.exports = {
   css: {
     sourceMap: true,
   },
-  outputDir: "dist",
+  outputDir: "dist/client",
   lintOnSave: false,
   pages: {
     index: {
@@ -18,6 +20,21 @@ module.exports = {
     performance: {
       maxAssetSize: 500000,
     },
+    resolve: {
+      alias: {
+        "@client": path.resolve(__dirname, "src/client/"),
+        "@components": path.resolve(__dirname, "src/client/components/"),
+        "@assets": path.resolve(__dirname, "src/client/assets/"),
+        "@pages": path.resolve(__dirname, "src/client/pages/"),
+        moment: "moment/src/moment",
+      },
+    },
+    plugins: [
+      new CopyWebpackPlugin([{ from: "./netlify.toml", to: "" }]),
+      new ForkTsCheckerWebpackPlugin({
+        configFile: "./tsconfig.client.json",
+      }),
+    ],
   },
   devServer: {
     proxy: {

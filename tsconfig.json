@@ -1,44 +1,25 @@
 {
-  "ts-node": {
-    // these options are overrides used only by ts-node
-    // same as our --compilerOptions flag and our TS_NODE_COMPILER_OPTIONS environment variable
-    "compilerOptions": {
-      "module": "commonjs"
-    }
-  },
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "strict": true,
-    "jsx": "preserve",
-    "importHelpers": true,
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "types": [
-      "webpack-env"
-    ],
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
-  },
   "include": [
-    "src/client/**/*.ts",
-    "src/client/**/*.vue"
+    "src/server/**/*.ts",
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "esnext",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "noEmit": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "paths": {
+      "@controller/*": [
+        "src/server/controller/*"
+      ],
+      "@routes/*":["src/server/routes/*"],
+      "@components/*":["src/client/components/*"],
+      "@pages/*":["src/client/components/*"]
+    },
+  }
 }
+
