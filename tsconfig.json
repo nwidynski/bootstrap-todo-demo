@@ -1,17 +1,30 @@
 {
   "include": [
-    "src/server/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.vue",
   ],
   "compilerOptions": {
     "baseUrl": ".",
     "target": "esnext",
-    "moduleResolution": "node",
-    "allowJs": true,
-    "noEmit": true,
+    "module": "esnext",
     "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
-    "removeComments": true,
-    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": false,
+    "types": [
+      "webpack-env"
+    ],
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
     "paths": {
       "@controller/*": [
         "src/server/controller/*"

@@ -7,6 +7,18 @@ module.exports = {
     {
       test: "src/server",
       presets: ["@babel/preset-typescript", "@babel/preset-env"],
+      plugins: [
+        [
+          "module-resolver",
+          {
+            root: ["./src/server"],
+            alias: {
+              "@controller": "./controller",
+              "@routes": "./routes",
+            },
+          },
+        ],
+      ],
     },
   ],
 };
