@@ -15,7 +15,8 @@
           type="checkbox"
           class="custom-control-input"
           :id="`task_${id}`"
-          :checked="state.isDone"
+          v-model="state.isDone"
+          @change="onIsDone"
         />
         <label class="custom-control-label" :for="`task_${id}`">{{
           state.name
@@ -78,7 +79,9 @@
         >
           Edit
         </button>
-        <button type="button" class="btn btn-danger mb-1">Delete</button>
+        <button type="button" class="btn btn-danger mb-1" @click="deleteTodo">
+          Delete
+        </button>
       </div>
     </td>
   </tr>
@@ -106,12 +109,13 @@ export default class Todo extends Vue {
     progress: this.progress,
   };
 
+  //* COMPUTED
   get formattedDate() {
-    return moment(this.dueDate).format("yyyy-MM-DD");
+    return moment(this.state.dueDate).format("yyyy-MM-DD");
   }
 
   set formattedDate(dueDate: string) {
-    this.state.dueDate = dueDate;
+    this.state.dueDate = moment(dueDate, "yyyy-MM-DD").toISOString();
   }
 
   //* METHODS
@@ -122,6 +126,17 @@ export default class Todo extends Vue {
   //* HELPER METHODS
   localizeDate(date: string) {
     return moment(date).format("DD.MM.YYYY");
+  }
+
+  onIsDone() {
+    fetch(`/api/todos/${this.id}`, {
+      method: "PUT",
+      headers: {
+        Accept: "Application/json",
+        "Content-Type": "Application/json",
+      },
+      body: JSON.stringify(this.state),
+    });
   }
 
   onSave() {

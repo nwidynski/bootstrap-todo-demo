@@ -8,37 +8,117 @@
         <th style="width: 20%">Actions</th>
       </thead>
       <tbody>
-        <tr v-if="this.todos.length === 0">
+        <tr v-if="todos.length === 0">
           <td colspan="4" class="text-center">No tasks found.</td>
         </tr>
-        <template v-else v-for="(todo, index) in this.todos">
+        <template v-else v-for="(todo, index) in todos">
           <Todo
             :id="todo.id"
             :name="todo.name"
             :isDone="todo.isDone"
             :dueDate="todo.dueDate"
             :progress="todo.progress"
-            @delete-todo="deleteTodo"
-            v-bind:key="index"
+            @delete-todo="(id, e) => deleteTodo(id, index, e)"
+            v-bind:key="todo.id"
           ></Todo>
         </template>
+        <tr v-if="addNewMode">
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              v-model="newTodo.name"
+              placeholder="Task name"
+              aria-label="task name"
+              aria-describedby="task-add-btn"
+            />
+          </td>
+          <td>
+            <input
+              type="date"
+              class="form-control"
+              v-model="formattedDate"
+              placeholder="Due date"
+              aria-label="due date"
+              aria-describedby="task-add-btn"
+            />
+          </td>
+          <td>
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model.number="newTodo.progress"
+                  aria-label=""
+                />
+                <div class="input-group-append">
+                  <span class="input-group-text">%</span>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" @click="addTodo">
+              Save
+            </button>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import moment from "moment";
+import { Vue, Component, Prop } from "vue-property-decorator";
 
 import Todo from "./Todo.vue";
 
 @Component({ components: { Todo } })
 export default class TodoList extends Vue {
+  @Prop() addNewMode!: boolean;
+  @Prop() toggleAddNewMode!: () => void;
+
   //* DATA
   isLoading = true;
-  todos = [];
+  todos: Object[] = [];
+  newTodo = {
+    name: "",
+    isDone: false,
+    dueDate: "",
+    progress: 0,
+  };
+
+  //* COMPUTED
+  get formattedDate() {
+    return moment(this.newTodo.dueDate).format("yyyy-MM-DD");
+  }
+
+  set formattedDate(dueDate: string) {
+    this.newTodo.dueDate = moment(dueDate, "yyyy-MM-DD").toISOString();
+  }
 
   //* METHODS
+  addTodo() {
+    fetch(`/api/todos`, {
+      method: "POST",
+      headers: {
+        Accept: "Application/json",
+        "Content-Type": "Application/json",
+      },
+      body: JSON.stringify(this.newTodo),
+    })
+      .then((response) => {
+        if (response.status !== 200) throw new Error("request failed");
+        return response;
+      })
+      .then((response) => response.json())
+      .then((newTodo) => this.todos.push(newTodo))
+      .then(this.toggleAddNewMode)
+      .catch(this.toggleAddNewMode);
+  }
+
   deleteTodo(id: number, index: number) {
     fetch(`/api/todos/${id}`, { method: "DELETE" })
       .then(() => this.todos.splice(index, 1))

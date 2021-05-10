@@ -28,25 +28,7 @@
     </header>
 
     <main class="mt-3" style="min-height: 100vh">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <TodoList></TodoList>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12">
-            <button
-              type="button"
-              class="btn btn-outline-primary w-100"
-              style="border-style: dashed"
-            >
-              Add
-            </button>
-          </div>
-        </div>
-      </div>
+      <TodoManager></TodoManager>
     </main>
   </div>
 </template>
@@ -54,9 +36,9 @@
 <script>
 import { Vue, Component } from "vue-property-decorator";
 
-import TodoList from "./components/TodoList.vue";
+import TodoManager from "./pages/TodoManager.vue";
 
-@Component({ components: { TodoList } })
+@Component({ components: { TodoManager } })
 export default class App extends Vue {}
 </script>
 
