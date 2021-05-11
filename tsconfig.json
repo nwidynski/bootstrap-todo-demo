@@ -1,7 +1,6 @@
 {
   "include": [
-    "src/server/**/*.ts",
-    "src/client/*.ts"
+    "src/server/**/*.ts"
   ],
   "compilerOptions": {
     "baseUrl": ".",
