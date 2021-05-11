@@ -29,7 +29,12 @@ module.exports = {
         moment: "moment/src/moment",
       },
     },
-    plugins: [new CopyWebpackPlugin([{ from: "./netlify.toml", to: "" }])],
+    plugins: [
+      new CopyWebpackPlugin([{ from: "./netlify.toml", to: "" }]),
+      new ForkTsCheckerWebpackPlugin({
+        configFile: "./tsconfig.client.json",
+      }),
+    ],
   },
   devServer: {
     proxy: {
