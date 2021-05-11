@@ -39,7 +39,7 @@ module.exports = {
   devServer: {
     proxy: {
       "^/api": {
-        target: "http://localhost:8081",
+        target: "https://bootstrap-todo-demo.herokuapp.com",
         ws: true,
         changeOrigin: true,
         secure: false,
