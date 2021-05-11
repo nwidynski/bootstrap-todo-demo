@@ -12,9 +12,11 @@
     "build": "npm run prisma && concurrently 'npm run build:client' 'npm run build:server'",
     "build:client": "vue-cli-service build src/client/main.ts",
     "build:server": "./node_modules/.bin/babel src/server --extensions='.ts' --out-dir dist/server && cp -r src/server/prisma dist/server && cp ./package.json dist/server && cp ./package-lock.json dist/server",
-    "prisma": "npx prisma generate --schema 'src/server/prisma/schema.prisma'"
+    "prisma": "npx prisma generate --schema 'src/server/prisma/schema.prisma'",
+    "heroku-postbuild": "npm run prisma && npm run build:server"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "@prisma/client": "^2.22.1",
     "concurrently": "^6.1.0",
     "core-js": "^3.6.5",
