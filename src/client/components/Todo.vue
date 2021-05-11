@@ -41,7 +41,7 @@
           <input
             type="text"
             class="form-control"
-            v-model="state.progress"
+            v-model.number="state.progress"
             aria-label=""
           />
           <div class="input-group-append">
