@@ -7,7 +7,10 @@ module.exports = {
     {
       test: ".",
       exclude: ["node_modules", "dist", "public", "src/client"],
-      presets: ["@babel/preset-typescript", "@babel/preset-env"],
+      presets: [
+        "@babel/preset-typescript",
+        ["@babel/preset-env", { useBuiltIns: "usage" }],
+      ],
       plugins: [
         [
           "module-resolver",
