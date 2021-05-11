@@ -129,7 +129,7 @@ export default class Todo extends Vue {
   }
 
   onIsDone() {
-    fetch(`/api/todos/${this.id}`, {
+    fetch(`https://bootstrap-todo-demo.herokuapp.com/todos/${this.id}`, {
       method: "PUT",
       headers: {
         Accept: "Application/json",
@@ -140,7 +140,7 @@ export default class Todo extends Vue {
   }
 
   onSave() {
-    fetch(`/api/todos/${this.id}`, {
+    fetch(`https://bootstrap-todo-demo.herokuapp.com/todos/${this.id}`, {
       method: "PUT",
       headers: {
         Accept: "Application/json",

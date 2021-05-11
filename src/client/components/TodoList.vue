@@ -101,7 +101,7 @@ export default class TodoList extends Vue {
 
   //* METHODS
   addTodo() {
-    fetch(`/api/todos`, {
+    fetch(`https://bootstrap-todo-demo.herokuapp.com/todos`, {
       method: "POST",
       headers: {
         Accept: "Application/json",
@@ -120,14 +120,16 @@ export default class TodoList extends Vue {
   }
 
   deleteTodo(id: number, index: number) {
-    fetch(`/api/todos/${id}`, { method: "DELETE" })
+    fetch(`https://bootstrap-todo-demo.herokuapp.com/todos/${id}`, {
+      method: "DELETE",
+    })
       .then(() => this.todos.splice(index, 1))
       .catch((err) => console.log(err));
   }
 
   //* LIFECYCLE HOOKS
   created() {
-    fetch("/api/todos")
+    fetch("https://bootstrap-todo-demo.herokuapp.com/todos")
       .then((response) => response.json())
       .then((body) => {
         this.isLoading = false;
