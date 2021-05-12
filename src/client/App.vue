@@ -6,7 +6,8 @@
         <button
           class="navbar-toggler"
           type="button"
-          data-toggle="collapse"
+          data-bs-toggle="collapse"
+          data-bs-target="#navigation-menu"
           aria-controls="navigation-menu"
           aria-expanded="false"
           aria-label="Toggle navigation"
