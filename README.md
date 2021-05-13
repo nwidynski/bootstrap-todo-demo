@@ -2,14 +2,16 @@
 
 ## Description
 
-A simple static todo webpage made with bootstrap 4.3
+A demo todo app made with Vue, Express and SQLite
 
-[Live Demo](https://bootstrap-todo-demo.netlify.app/)
+[Live Demo Client](https://bootstrap-todo-demo.netlify.app/)
+[Live Demo Server](ttps://bootstrap-todo-demo.herokuapp.com/todos)
 
 ## Getting Started
 
 ### Dependencies
 
+* NPM scripts currently only work on OSX
 * node, npm, git, browser
 
 ### Installing
@@ -22,24 +24,30 @@ git clone https://github.com/nwidynski/bootstrap-todo-demo.git
 ```
 cd bootstrap-todo-demo && npm install
 ```
+* generate prisma client
+```
+npx prisma generate
+```
 
 ### Executing program
 
-* Start the express server
+* Serve the development server & client
 ```
-npm run start
+npm run serve
 ```
-* Visit http://localhost
+* Visit http://localhost:8080
 
 ## Authors
 
 Nikolas Schröter
+Pascal Philipp Cujé
 
 ## Version History
 
 * 1.0
     * Initial Release
-
+* 2.0
+    * Vue App
 ## License
 
 This project is  licensed under the GNU License
