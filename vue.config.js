@@ -1,4 +1,4 @@
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const path = require("path");
 
@@ -24,14 +24,14 @@ module.exports = {
     resolve: {
       alias: {
         "@client": path.resolve(__dirname, "src/client/"),
-        moment: "moment/src/moment",
       },
     },
     plugins: [
-      new CopyWebpackPlugin([{ from: "./netlify.toml", to: "" }]),
       new ForkTsCheckerWebpackPlugin({
         configFile: "./tsconfig.client.json",
       }),
+      // To strip all locales except “en”
+      new MomentLocalesPlugin(),
     ],
   },
   devServer: {

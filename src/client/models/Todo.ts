@@ -4,4 +4,3 @@ export default interface Todo {
   dueDate: string;
   progress: number;
 }
-,
