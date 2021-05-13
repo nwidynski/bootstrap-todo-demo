@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import TodoController from "@controller/todo";
+import TodoController from "@server/controller/todo";
 
 const router = express.Router();
 

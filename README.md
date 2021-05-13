@@ -2,7 +2,7 @@
 
 ## Description
 
-A simple static todo webpage made with bootstrap 4.3
+A demo todo app made with Vue, Express and SQLite
 
 [Live Demo](https://bootstrap-todo-demo.netlify.app/)
 

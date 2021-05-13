@@ -12,6 +12,7 @@ module.exports = {
     index: {
       entry: "src/client/main.ts",
       template: "public/index.html",
+      title: "Todo Demo",
       filename: "index.html",
       chunks: ["chunk-vendors", "chunk-common", "app", "index"],
     },
@@ -23,9 +24,6 @@ module.exports = {
     resolve: {
       alias: {
         "@client": path.resolve(__dirname, "src/client/"),
-        "@components": path.resolve(__dirname, "src/client/components/"),
-        "@assets": path.resolve(__dirname, "src/client/assets/"),
-        "@pages": path.resolve(__dirname, "src/client/pages/"),
         moment: "moment/src/moment",
       },
     },
@@ -39,7 +37,7 @@ module.exports = {
   devServer: {
     proxy: {
       "^/api": {
-        target: "https://bootstrap-todo-demo.herokuapp.com",
+        target: "http://localhost",
         ws: true,
         changeOrigin: true,
         secure: false,

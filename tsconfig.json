@@ -12,12 +12,10 @@
     "forceConsistentCasingInFileNames": true,
     "lib": ["es2020", "dom"],
     "paths": {
-      "@controller/*": [
-        "src/server/controller/*"
+      "@server/*": [
+        "src/server/*"
       ],
-      "@routes/*":["src/server/routes/*"],
-      "@components/*":["src/client/components/*"],
-      "@pages/*":["src/client/components/*"]
+      "@client/*":["src/client/*"],
     },
   }
 }

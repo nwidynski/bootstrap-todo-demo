@@ -91,6 +91,8 @@
 import moment from "moment";
 import { Vue, Component, Prop, Emit } from "vue-property-decorator";
 
+import BackendRouter from "@client/utils/http";
+
 @Component
 export default class Todo extends Vue {
   //* PROPS
@@ -129,30 +131,11 @@ export default class Todo extends Vue {
   }
 
   onIsDone() {
-    fetch(`https://bootstrap-todo-demo.herokuapp.com/todos/${this.id}`, {
-      method: "PUT",
-      headers: {
-        Accept: "Application/json",
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify(this.state),
-    });
+    BackendRouter.TodoRouter.EndPoints.UPDATE(this.id, this.state).catch();
   }
 
   onSave() {
-    fetch(`https://bootstrap-todo-demo.herokuapp.com/todos/${this.id}`, {
-      method: "PUT",
-      headers: {
-        Accept: "Application/json",
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify(this.state),
-    })
-      .then((response) => {
-        if (response.status !== 200) throw new Error("request failed");
-        return response;
-      })
-      .then((response) => response.json())
+    BackendRouter.TodoRouter.EndPoints.UPDATE(this.id, this.state)
       .then((body) => (this.state = body))
       .then(this.toggleEdit)
       .catch(this.toggleEdit);
