@@ -11,7 +11,7 @@ A demo todo app made with Vue, Express and SQLite
 
 ### Dependencies
 
-* NPM scripts currently only work on OSX
+* DISCLAIMER: NPM scripts currently only work on OSX
 * node, npm, git, browser
 
 ### Installing
@@ -39,8 +39,8 @@ npm run serve
 
 ## Authors
 
-Nikolas Schröter
-Pascal Philipp Cujé
+- Nikolas Schröter
+- Pascal Philipp Cujé
 
 ## Version History
 
