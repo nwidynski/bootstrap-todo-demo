@@ -1,8 +1,10 @@
 import express from "express";
-import TodoController from "../controller/todo";
+import cors from "cors";
+import TodoController from "@controller/todo";
 
 const router = express.Router();
 
+router.use(cors());
 router.use(express.json());
 
 router.get("/", TodoController.list);
