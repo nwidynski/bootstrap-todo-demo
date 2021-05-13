@@ -6,8 +6,8 @@
         <button
           class="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navigation-menu"
+          data-toggle="collapse"
+          data-target="#navigation-menu"
           aria-controls="navigation-menu"
           aria-expanded="false"
           aria-label="Toggle navigation"
@@ -37,7 +37,7 @@
 <script>
 import { Vue, Component } from "vue-property-decorator";
 
-import TodoManager from "@pages/TodoManager.vue";
+import TodoManager from "@client/pages/TodoManager.vue";
 
 @Component({ components: { TodoManager } })
 export default class App extends Vue {}

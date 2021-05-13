@@ -1,4 +1,4 @@
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const path = require("path");
 
@@ -12,6 +12,7 @@ module.exports = {
     index: {
       entry: "src/client/main.ts",
       template: "public/index.html",
+      title: "Todo Demo",
       filename: "index.html",
       chunks: ["chunk-vendors", "chunk-common", "app", "index"],
     },
@@ -23,23 +24,20 @@ module.exports = {
     resolve: {
       alias: {
         "@client": path.resolve(__dirname, "src/client/"),
-        "@components": path.resolve(__dirname, "src/client/components/"),
-        "@assets": path.resolve(__dirname, "src/client/assets/"),
-        "@pages": path.resolve(__dirname, "src/client/pages/"),
-        moment: "moment/src/moment",
       },
     },
     plugins: [
-      new CopyWebpackPlugin([{ from: "./netlify.toml", to: "" }]),
       new ForkTsCheckerWebpackPlugin({
         configFile: "./tsconfig.client.json",
       }),
+      // To strip all locales except “en”
+      new MomentLocalesPlugin(),
     ],
   },
   devServer: {
     proxy: {
       "^/api": {
-        target: "https://bootstrap-todo-demo.herokuapp.com",
+        target: "http://localhost",
         ws: true,
         changeOrigin: true,
         secure: false,

@@ -73,7 +73,9 @@
 import moment from "moment";
 import { Vue, Component, Prop } from "vue-property-decorator";
 
-import Todo from "@components/Todo.vue";
+import BackEndRouter from "@client/utils/http";
+import TodoModel from "@client/models/Todo";
+import Todo from "@client/components/Todo.vue";
 
 @Component({ components: { Todo } })
 export default class TodoList extends Vue {
@@ -82,7 +84,7 @@ export default class TodoList extends Vue {
 
   //* DATA
   isLoading = true;
-  todos: Object[] = [];
+  todos: TodoModel[] = [];
   newTodo = {
     name: "",
     isDone: false,
@@ -101,41 +103,26 @@ export default class TodoList extends Vue {
 
   //* METHODS
   addTodo() {
-    fetch(`https://bootstrap-todo-demo.herokuapp.com/todos`, {
-      method: "POST",
-      headers: {
-        Accept: "Application/json",
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify(this.newTodo),
-    })
-      .then((response) => {
-        if (response.status !== 200) throw new Error("request failed");
-        return response;
-      })
-      .then((response) => response.json())
+    BackEndRouter.TodoRouter.EndPoints.CREATE(this.newTodo)
       .then((newTodo) => this.todos.push(newTodo))
       .then(this.toggleAddNewMode)
       .catch(this.toggleAddNewMode);
   }
 
   deleteTodo(id: number, index: number) {
-    fetch(`https://bootstrap-todo-demo.herokuapp.com/todos/${id}`, {
-      method: "DELETE",
-    })
+    BackEndRouter.TodoRouter.EndPoints.DELETE(id)
       .then(() => this.todos.splice(index, 1))
-      .catch((err) => console.log(err));
+      .catch();
   }
 
   //* LIFECYCLE HOOKS
   created() {
-    fetch("https://bootstrap-todo-demo.herokuapp.com/todos")
-      .then((response) => response.json())
+    BackEndRouter.TodoRouter.EndPoints.LIST()
       .then((body) => {
         this.isLoading = false;
         this.todos = body;
       })
-      .catch((err) => console.log(err));
+      .catch();
   }
 }
 </script>

@@ -1,8 +1,5 @@
 {
-  "include": [
-    "src/client/**/*.ts",
-    "src/client/**/*.vue",
-  ],
+  "include": ["src/client/**/*.ts", "src/client/**/*.vue"],
   "compilerOptions": {
     "baseUrl": ".",
     "target": "esnext",
@@ -16,15 +13,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": false,
-    "types": [
-      "webpack-env"
-    ],
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+    "types": ["webpack-env"],
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   }
 }
-

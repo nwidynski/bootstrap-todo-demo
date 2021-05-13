@@ -27,7 +27,7 @@
 <script>
 import { Vue, Component } from "vue-property-decorator";
 
-import TodoList from "@components/TodoList.vue";
+import TodoList from "@client/components/TodoList.vue";
 
 @Component({ components: { TodoList } })
 export default class TodoManager extends Vue {
