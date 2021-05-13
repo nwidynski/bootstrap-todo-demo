@@ -5,7 +5,7 @@
 A demo todo app made with Vue, Express and SQLite
 
 [Live Demo Client](https://bootstrap-todo-demo.netlify.app/)
-[Live Demo Server](ttps://bootstrap-todo-demo.herokuapp.com/todos)
+[Live Demo Server](https://bootstrap-todo-demo.herokuapp.com/todos)
 
 ## Getting Started
 
